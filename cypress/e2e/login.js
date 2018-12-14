@@ -12,13 +12,9 @@ describe('login', () => {
         .click()
 
         // verify things after getting logged in
-        .url()
-        .should('eq', `${Cypress.config().baseUrl}/`)
-        .window()
-        .its('localStorage.token')
-        .should('be.a', 'string')
-        .getByTestId('username-display', {timeout: 500})
-        .should('have.text', user.username)
+
+        .assertHome()
+        .assertLoggedInAs(user)
     })
   })
 })
