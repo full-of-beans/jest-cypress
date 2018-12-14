@@ -18,7 +18,7 @@
     "dev:server": "node server",
     "dev:client": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
-    "precommit": "lint-staged && npm run test:e2e:run",
+    "precommit": "lint-staged",
     "postbuild": "cp ./public/index.html ./dist/index.html",
     "start": "npm-run-all --parallel start:*",
     "start:server": "node server",
