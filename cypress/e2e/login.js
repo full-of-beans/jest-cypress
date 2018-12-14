@@ -5,19 +5,14 @@ describe('login', () => {
     const user = userBuilder()
 
     // register the user and then logout
-    cy.visit('/')
-      .getByText(/register/i)
-      .click()
-      .getByLabelText(/username/i)
-      .type(user.username)
-      .getByLabelText(/password/i)
-      .type(user.password)
-      .getByText(/submit/i)
-      .click()
-      .getByText(/logout/i)
-      .click()
+    cy.request({
+      url: 'http://localhost:3000/register',
+      method: 'POST',
+      body: user,
+    })
 
-      // login tests start now
+    // login tests start now
+    cy.visit('/')
       .getByText(/login/i)
       .click()
       .getByLabelText(/username/i)
