@@ -2,7 +2,7 @@ describe('anonymous calculator', () => {
   it('can make calculations', () => {
     const user = cy
     user
-      .visit('http://localhost:8080')
+      .visit('/')
       .get('._2S_Gj6clvtEi-dZqCLelKb > :nth-child(5)')
       .click()
       .get('._3Ny0bi3qR2Hqp_CL7Ya8tU')
