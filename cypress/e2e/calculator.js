@@ -19,16 +19,16 @@ describe('anonymous calculator', () => {
 describe('authenticated calculator', () => {
   it('displays the username', () => {
     cy.createUser().then(user => {
+      cy.request({
+        url: 'http://localhost:3000/login',
+        method: 'POST',
+        body: user,
+      }).then(response => {
+        window.localStorage.setItem('token', response.body.user.token)
+      })
       cy.visit('/')
-        .getByText(/login/i)
-        .click()
-        .getByLabelText(/username/i)
-        .type(user.username)
-        .getByLabelText(/password/i)
-        .type(user.password)
-        .getByText(/submit/i)
-        .click()
-        .assertLoggedInAs(user)
+        .getByTestId('username-display')
+        .should('have.text', user.username)
         .getByText(/logout/i)
         .click()
         .queryByTestId('username-display', {timeout: 300})
